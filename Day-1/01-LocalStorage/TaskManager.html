@@ -23,7 +23,12 @@
 
 	function onBtnAddTaskClick(){
 		var taskName = txtTask.value;
+		/*Persist the task in storage*/
+		var key = new Date().getTime().toString();
+		window.localStorage.setItem(key,taskName);
+
 		var newTaskItem = document.createElement("li");
+		newTaskItem.setAttribute("data-task-id",key);
 		newTaskItem.innerHTML = taskName;
 		newTaskItem.addEventListener("click",onTaskItemClick);
 		ulTaskList.appendChild(newTaskItem);
@@ -34,8 +39,13 @@
 	function onBtnRemoveCompletedClick(){
 		for(var i=ulTaskList.children.length-1;i>=0;i--){
 			var taskItem = ulTaskList.children[i];
-			if (taskItem.classList.contains("completed"))
+			if (taskItem.classList.contains("completed")){
+				/*Remove item from persistence storage*/
+				var key = taskItem.getAttribute("data-task-id");
+				window.localStorage.removeItem(key);
+				
 				taskItem.remove();
+			}
 		}
 	}
 	</script>
