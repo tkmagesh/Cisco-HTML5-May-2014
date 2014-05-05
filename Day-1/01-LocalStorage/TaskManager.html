@@ -14,10 +14,13 @@
 	<script src="taskStorage.js"></script>
 	<script>
 	
-	var txtTask;
+	var txtTask, ulTaskList;
 	window.addEventListener("DOMContentLoaded",init);
 	var storage = getTaskStorage();
-
+	window.addEventListener("storage", onStorageChanged);
+	function onStorageChanged(storageEvt){
+		loadTasksFromStorage();
+	}
 	function init(){
 		document.getElementById("btnAddTask").addEventListener("click",onBtnAddTaskClick);
 		document.getElementById("btnRemoveCompleted").addEventListener("click",onBtnRemoveCompletedClick);
@@ -27,6 +30,7 @@
 	};
 
 	function loadTasksFromStorage(){
+		ulTaskList.innerHTML = "";
 		var allTasks = storage.getAllTasks();
 		for(var i=0;i<allTasks.length;i++)
 			addTaskToList(allTasks[i]);
