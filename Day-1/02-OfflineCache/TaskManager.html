@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" manifest="app.manifest">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style-online.css">
+	<script src="taskStorage.js"></script>
+	<script src="TaskManager.js"></script>
+	<script>
+	applicationCache.addEventListener("updateready",function(){
+		document.getElementById("divUpdateReady").style.display = "block";
+	})
+	window.addEventListener("DOMContentLoaded",function(){
+		document.getElementById("btnYes").addEventListener("click",function(){
+			window.location.reload();
+		});
+		document.getElementById("btnNo").addEventListener("click",function(){
+			document.getElementById("divUpdateReady").style.display = "none";
+		})
+	})
+	
+	</script>
+</head>
+<body>
+	<h1>Task Manager - Ver 0.3</h1>
+	<hr>
+	<span>Task :</span>
+	<input type="text" name="" id="txtTask">
+	<input type="button" value="Add Task" id="btnAddTask">
+	<input type="button" value="Remove Completed" id="btnRemoveCompleted">
+	<ul id="ulTaskList"></ul>
+	<div id="divUpdateReady">
+		A new version of the application is available? Do you want to use it? <input type="button" value="Yes" id="btnYes"><input type="button" value=" No " id="btnNo">
+	</div>
+</body>
+</html>
