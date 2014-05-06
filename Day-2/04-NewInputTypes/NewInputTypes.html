@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>New Input Types</title>
+	<script>
+	window.addEventListener("DOMContentLoaded",function(){
+		document.getElementById("inputRange").addEventListener("change",function(){
+			document.getElementById("spanRange").innerHTML = this.value;
+		});
+	});
+	</script>
+</head>
+<body>
+	<form action="">
+		<input type="text">
+	<br>
+	<input type="number">
+	<br>
+	<input type="range" min="0" max="100" value="0" id="inputRange"><span id="spanRange"></span>
+	<br>
+	<input type="email">
+	<br>
+	<input type="tel">
+	<br>
+	<input type="url">
+	<br>
+	<input type="color">
+	<br>
+	<input type="date" required>
+	<br>
+	<input type="xyz">
+	<br>
+	<input type="submit">
+	</form>
+</body>
+</html>
+
+<!-- To verify the support of an input type
+
+function isInputTypeSupported(inputType){
+   if (inputType === "text") return true;
+   var element = document.createElement("input");
+   element.setAttribute("type",inputType);
+   return element.type === inputType;
+}
+
+ -->
