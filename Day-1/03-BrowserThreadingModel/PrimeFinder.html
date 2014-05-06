@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Prime Finder</title>
+	<script>
+	window.addEventListener("DOMContentLoaded",init);
+	function init(){
+		txtStart = document.getElementById("txtStart");
+		txtEnd = document.getElementById("txtEnd");
+		document.getElementById("btnFindPrimes").addEventListener("click",onBtnFindPrimesClick);
+	}
+	function onBtnFindPrimesClick(){
+		var start = parseInt(txtStart.value,10);
+		var end = parseInt(txtEnd.value,10);
+		findPrimeCount(start,end);
+	}
+	function findPrimeCount(start,end){
+		var current = start;
+		var primeCount = 0;
+		function oneIteration(){
+			if (isPrime(current)){
+				primeCount++;
+				var percentCompleted = ((current-start)/(end-start)) * 100;
+				//if (percentCompleted % 5 === 0)
+					displayStatus(primeCount, percentCompleted);
+			}
+			if (++current <= end){
+				setTimeout(oneIteration);
+			}
+		}
+		oneIteration();
+	}
+	function displayStatus(primeCount,percentCompleted){
+		document.getElementById("divMessages").innerHTML = primeCount + " prime numbers found with " + percentCompleted + " % completed";
+	}
+	function isPrime(n){
+		if (n<=3) return true;
+		for(var i=2;i<=Math.sqrt(n);i++)
+			if (n%i == 0) return false;
+		return true;
+	}
+	</script>
+</head>
+<body>
+	<span>Start :</span>
+	<input type="text" name="" id="txtStart">
+	<span>End :</span>
+	<input type="text" name="" id="txtEnd">
+	<input type="button" id="btnFindPrimes" value="Find Primes">
+	<div id="divMessages"></div>
+</body>
+</html>
